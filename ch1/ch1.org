@@ -1,0 +1,80 @@
+#+TITLE: K&R Notes - Chapter 1
+#+AUTHOR: @frankpf
+
+* Notes
+A /declaration/ consists of a name and a list of variables, such as
+: int fahr, celsius;
+: int lower, upper, step;
+
+A ~float~ number is tipically a 32-bit quantity, with at least six significant
+digits and magnitude generally between about 10^-38 and 10^38.
+
+In C, integer division /truncates/ (any fractional part is discarded):
+: celsius = 5 * (fahr - 32) / 9;
+Here, we didn't multiply ~(fahr - 32)~ by ~5/9~ because of that: 5 and 9 are
+both integers, so 5/9 would have truncated to 0 and we would be multiplying by
+zero!
+
+If an arithmetic operator has integer operands, an integer operation is
+performed. If an arithmetic operator has one floating-point operand and one
+integer operand, however, *the integer will be converted to floating point before
+the operation is done*. 
+
+~printf~ format string examples:
+| %d    | print as decimal integer                                           |
+| %6d   | print as decimal integer, at least 6 characters wide               |
+| %f    | print as floating point                                            |
+| %6f   | print as floating point, at least 6 characters wide                |
+| %.2f  | print as floating point, 2 characters after decimal point          |
+| %6.2f | print as floating point, at least 6 wide and 2 after decimal point |
+| %6.0f | print as floating point, at least 6 wide with no decimal point     |
+Among others, ~printf~ also recognizes ~%o~ for octal, ~%x~ for hexadecimal,
+~%c~ for character, ~%s~ for character string and ~%%~ for itself.
+
+Assignments in C are expressions and have values. For example, the value of the
+expression
+~c = getchar()~
+is the value of the LHS after the assignment.
+
+~long~ variables are at least 32 bits. The format string ~%ld~ tells ~printf~
+that the argument is a ~long~ integer.
+
+~printf~ uses ~%f~ for both ~float~ and ~double~.
+
+A character written between single quotes represents an integer value equal to
+the numerical value of the character in the machine's charset. This is called a
+/character constant/, although it's just another way to write a small integer.
+So, for example, 'A' is a character constant; in the ASCII charset its value 
+
+
+* Programs
+** ASCII Table
+Program: [[./programs/ascii.c]]
+** File copying
+Program: [[./programs/cp.c]]
+
+> ~char~ could've been used for c here, but we used ~int~ for a subtle but
+> important reason. The problem is distinguishing the end of input from valid
+> data. The solution is that ~getchar~ returns a distinctive value when there is
+> no more input, a value that cannot be confused with any real character. This
+> value is called ~EOF~, for ``end of file''. We must declare ~c~ to be a type
+> big enough to hold any value that ~getchar~ returns. We can't use ~char~ since
+> c must be big enough to hold ~EOF~ in addition to any possible ~char~.
+> Therefore we use ~int~.
+
+Apparently, ~EOF~ is a macro defined to a negative number, commonly -1. This is
+used because there's no valid negative character code (see ASCII table).
+
+
+** Character counting
+Program: [[./programs/charcount.c]]
+** Line counting
+Program: [[./programs/lc.c]]
+** Whitespace counting
+Program: [[./programs/wscount.c]]
+** Word counting
+Program: [[./programs/wc.c]]
+** Count digits etc
+Program: [[./programs/countall.c]]
+** TODO Word length histogram
+** TODO Character frequency histogram
