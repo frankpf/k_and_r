@@ -44,7 +44,7 @@ that the argument is a ~long~ integer.
 A character written between single quotes represents an integer value equal to
 the numerical value of the character in the machine's charset. This is called a
 /character constant/, although it's just another way to write a small integer.
-So, for example, 'A' is a character constant; in the ASCII charset its value 
+So, for example, 'A' is a character constant; in the ASCII charset its value is 65.
 
 
 * Programs
