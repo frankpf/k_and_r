@@ -62,7 +62,7 @@ Program: [[./programs/cp.c]]
 : c must be big enough to hold ~EOF~ in addition to any possible ~char~.
 : Therefore we use ~int~.
 
-Apparently, ~EOF~ is a macro defined to a negative number, commonly -1. This is
+~EOF~ is a macro defined to a negative number, commonly -1. This is
 used because there's no valid negative character code (see ASCII table).
 
 
