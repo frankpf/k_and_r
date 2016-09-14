@@ -69,7 +69,7 @@ used because there's no valid negative character code (see ASCII table).
 ** Character counting
 Program: [[./programs/charcount.c]]
 ** Line counting
-Program: [[./programs/lc.c]]
+Program: [[./programs/linecount.c]]
 ** Whitespace counting
 Program: [[./programs/wscount.c]]
 ** Word counting
