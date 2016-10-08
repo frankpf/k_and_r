@@ -1,0 +1,11 @@
+#+TITLE: Notes on Pointers and Memory
+#+AUTHOR: @frankpf
+
+These are my personal notes on [[http://cslibrary.stanford.edu/102/][Pointers
+and Memory]], "a 31 page introduction to programming with pointers and memory in
+C", written by Nick Parlante.
+
+Much of the text/images here were produced by the author, not by me.
+
+* Index
+- [[./notes.or][Notes]]

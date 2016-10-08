@@ -1,0 +1,95 @@
+#+TITLE: Notes
+#+AUTHOR: frankpf
+#+EMAIL: hi@fkp.me
+
+* What is a pointer?
+A pointer stores a *reference* to another value. The variable the pointer refers
+to is sometimes known as its "pointee". 
+* Pointer dereferencing
+The "dereference" operation follows a pointer's reference to get the value of
+its pointee. When the dereference operation is used correctly, it's simple. It
+just accesses the value of the pointee. _The only restriction is that the
+pointer must have a valid pointee for the dereference to access. Almost all bugs
+in pointer code involve violating that one restriction._
+* The NULL pointer
+The constant NULL is a special pointer value which encodes the idea of "points
+to nothing". It turns out to be convenient to have a well defined pointer value
+which represents the idea that a pointer does not have a pointee. It is a
+runtime error to dereference a NULL pointer.
+* Pointer assignment
+The assignment operation (=) between pointers makes them point to the same
+pointee. Assignment between pointers does not change or even touch the pointees.
+It just changes which pointee a pointer refers to.
+* Sharing
+Two pointers which both refer to a single pointee are said to be "sharing". That
+two or more entities can cooperatively share a single memory structure is a key
+advantage of pointers in all computer languages. Pointer manipulation is just
+technique - *sharing is often the real goal*.
+* Shallow and deep copying
+[[./shallow_vs_deep.png]]
+
+* Bad pointers
+When a pointer is first allocated, it does not have a pointee. The pointer is
+"uninitialized" or simply "bad". A dereference operation on a bad pointer is a
+serious runtime error. If you're lucky, the operation will crash or halt
+immediately. If you're unlucky, the bad pointer dereference will corrupt a
+random area of memory, slighly altering the operation of the program so that it
+goes wrong sometime later.
+Bad pointers are very common. In fact, *every pointer starts with a bad value*.
+Correct code *overwrites the bad value with a correct reference to a pointee*,
+and thereafter the pointer works fine. There is nothing automatic that gives a
+pointer a valid pointee.
+Pointers in dynamic languages such as Perl, Lisp and Java work a little
+differently. The runtime system sets each pointer to NULL when it is allocated
+and checks it each time it's dereferenced. What this means is that code can
+still exhibit pointer bugs, but they will crash politely on the offending line.
+These runtime checks are also a reason why such languages always run at least a
+little slower than a language like C.
+*** Basic rules
+Basic rules for a happy life with pointers:
+1. The pointer must be allocated
+2. The pointee must be allocated
+3. The pointer must point to a valid pointee
+*** C syntax
+#+BEGIN_SRC c
+int *intPtr; // pointer to int
+struct fraction *structPtr; // pointer to struct fraction
+#+END_SRC
+*** The & operator -- Reference
+There are several ways to compute a reference to a pointee suitable for storing
+in a pointer. The simplest way is to use the & operator. The & operator can go
+to the left of any variable, and it computes a reference to that variable.
+
+#+BEGIN_SRC c
+int num;
+int *numPtr;
+
+num = 42;
+numPtr = &num; // Compute a reference to num and store it in numPtr
+#+END_SRC
+* The * operator -- Dereference
+The star operator (*) dereferences a pointer. The * is a unary operator which
+goes to the left of the pointer it dereferences. The pointer must have a
+pointee, otherwise the operation is a runtime error.
+
+#+BEGIN_SRC c
+int a = 1;
+int b = 2;
+int c = 3;
+
+int *p, *q;
+
+p = &a;
+q = &b;
+
+c = *p; // Retrieve p's pointee value (1) and store it in c
+p = q; // change p to share with q (p's pointee is now b)
+*p = 13 // Retrieve p's pointee and change its value to 13
+
+// The state of the memory now is:
+// a = 1
+// b = 13
+// c = 1
+// p points to b
+// q points to b
+#+END_SRC
