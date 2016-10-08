@@ -1,7 +1,7 @@
 #+TITLE: Notes on books
 #+AUTHOR: @frankpf
 
-These are my personal notes on books I'm currently reading/have already read.
+These are personal notes on books I'm currently reading/have already read.
 Each book has its own README and set of notes in a subdirectory.
 
 The notes were taken using [[https://www.gnu.org/software/emacs/][Emacs]] and the awesome [[http://orgmode.org][Org mode]].
