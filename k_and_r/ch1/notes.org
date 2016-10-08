@@ -46,10 +46,10 @@ the numerical value of the character in the machine's charset. This is called a
 /character constant/, although it's just another way to write a small integer.
 So, for example, 'A' is a character constant; in the ASCII charset its value is 65.
 
-
 * Programs
 ** ASCII Table
 Program: [[./programs/ascii.c]]
+
 ** File copying
 Program: [[./programs/cp.c]]
 
@@ -65,16 +65,20 @@ Program: [[./programs/cp.c]]
 ~EOF~ is a macro defined to a negative number, commonly -1. This is
 used because there's no valid negative character code (see ASCII table).
 
-
 ** Character counting
 Program: [[./programs/charcount.c]]
+
 ** Line counting
 Program: [[./programs/linecount.c]]
+
 ** Whitespace counting
 Program: [[./programs/wscount.c]]
+
 ** Word counting
 Program: [[./programs/wc.c]]
+
 ** Count digits etc
 Program: [[./programs/countall.c]]
+
 ** TODO Word length histogram
 ** TODO Character frequency histogram

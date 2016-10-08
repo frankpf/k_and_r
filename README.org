@@ -9,5 +9,6 @@ The notes were taken using [[https://www.gnu.org/software/emacs/][Emacs]] and th
 * Books
 ** Reading
 [[./k_and_r][The C Programming Language (K&R)]]
+
 ** Read
 [[./pointers_and_memory][Pointers and Memory]]
