@@ -1,0 +1,5 @@
+#+TITLE: Notes on K&R
+#+AUTHOR: @frankpf
+
+These are my personal notes on the book "The C Programming Language", 2nd ed.,
+written by Brian Kernighan and Dennis Ritchie.
