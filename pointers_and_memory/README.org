@@ -8,4 +8,4 @@ C", written by Nick Parlante.
 Much of the text/images here were produced by the author, not by me.
 
 * Index
-- [[./notes.or][Notes]]
+- [[./notes.org][Notes]]
