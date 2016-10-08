@@ -50,19 +50,19 @@ still exhibit pointer bugs, but they will crash politely on the offending line.
 These runtime checks are also a reason why such languages always run at least a
 little slower than a language like C.
 
-*** Basic rules
+* Basic rules
 Basic rules for a happy life with pointers:
 1. The pointer must be allocated
 2. The pointee must be allocated
 3. The pointer must point to a valid pointee
 
-*** C syntax
+* C pointer syntax
 #+BEGIN_SRC c
 int *intPtr; // pointer to int
 struct fraction *structPtr; // pointer to struct fraction
 #+END_SRC
 
-*** The & operator -- Reference
+* The & operator -- Reference
 There are several ways to compute a reference to a pointee suitable for storing
 in a pointer. The simplest way is to use the & operator. The & operator can go
 to the left of any variable, and it computes a reference to that variable.
