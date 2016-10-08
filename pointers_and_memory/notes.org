@@ -8,9 +8,9 @@ to is sometimes known as its "pointee".
 * Pointer dereferencing
 The "dereference" operation follows a pointer's reference to get the value of
 its pointee. When the dereference operation is used correctly, it's simple. It
-just accesses the value of the pointee. /The only restriction is that the
-pointer must have a valid pointee for the dereference to access. Almost all bugs
-in pointer code involve violating that one restriction./
+just accesses the value of the pointee. The only restriction is that /the
+pointer must have a valid pointee for the dereference to access/. Almost all bugs
+in pointer code involve violating that one restriction.
 * The NULL pointer
 The constant NULL is a special pointer value which encodes the idea of "points
 to nothing". It turns out to be convenient to have a well defined pointer value
