@@ -1,5 +1,5 @@
 #+TITLE: Notes
-#+AUTHOR: frankpf
+#+AUTHOR: @frankpf
 
 * What is a pointer?
 A pointer stores a *reference* to another value. The variable the pointer refers
