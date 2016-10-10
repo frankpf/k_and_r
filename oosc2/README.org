@@ -1,0 +1,8 @@
+#+TITLE: Notes on OOSC-2
+#+AUTHOR: @frankpf
+
+These are my personal notes on the book "Object-Oriented Software Construction",
+2nd ed., written by Bertrand Meyer.
+
+* Index
+- [[./preface.org][Preface notes]]

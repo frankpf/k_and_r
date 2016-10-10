@@ -1,0 +1,54 @@
+#+TITLE: Notes on OOSC-2 - Preface
+#+AUTHOR: @frankpf
+
+* Principal goal of the book
+"How software developers can use object technology to improve, /in some cases
+dramatically/, the quality of the software they produce."
+
+* Structure, reliability, epistemology and classification
+Object technology is the combination of four ideas:
+
+- Structuring method :: to achieve reusable and flexible systems, it's better to
+     base the structure of software systems on the /object types/ rather than on
+     the actions. The resulting concept is the *class*, a versatile mechanism
+     serving as the basis for modularity and the type system.
+
+- Reliability discipline :: treat systems as components adhering to *contracts*
+     that interact the way businesses do, with explicitly defined obligations
+     and benefits for each party.
+
+- Epistemological discipline :: objects described by a class are only defined by
+     what we can do with it: its operations (/features/) and formal properties
+     of these operations (/contracts/)
+
+- Classification technique :: object-oriented method relies heavily on a
+     classification technique known as *inheritance*.
+
+* Simple but powerful
+We use a small but powerful array of techniques for producing reusable,
+extendible and reliable software: 
+
+- Polymorphism and dynamic binding
+- A new view of types and type checking
+- Genericity, constrained and unconstrained
+- Information hiding
+- Safe exception handling
+- Automatic garbage collection
+
+* Notation
+"This book is about the object-oriented method for reusing, analyzing,
+designing, implementing and maintaining software; the language is an important
+and I hope natural consequence of that method, not an aim in itself."
+
+* Analysis, design and implementation
+One of the important aspects of object technology is the /seamless/ approach,
+which means that the notation (language) used to describe a problem is meant for
+analysis, design as well as implementation.
+
+Unfortunately, some of the recent evolution in the field goes against that
+principle:
+
+- OO implementation languages that are unfit for analysis, design and in
+  general for high-level reasoning
+
+- OO analysis methods that do not cover implementation
