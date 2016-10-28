@@ -1,0 +1,129 @@
+#+TITLE: Notes on PiH
+#+AUTHOR: @frankpf
+
+* Chapter 1
+The functional style is quite different from most popular languages. Most of
+those are based on the idea of changing stored values, while Haskell is based
+upon the idea of applying functions to arguments. This leads to much simpler
+programs.
+
+** Functions
+Haskell uses the following syntax for functions:
+: double x = x + x -- defines double x
+: double 6 -- evaluates to 12
+
+** Haskell features
+- Concise programs :: due to the high-level nature of the functional style,
+     Haskell programs are often times shorter.
+- Powerful type system :: Haskell has strong, static typing. Its type system has
+     powerful features, such as type inference, type classes and parametric
+     polymorphism.
+- Monadic effects :: Functions in Haskell are pure, meaning they do not have
+     side effects[1].
+- Lazy evaluation :: No computation is performed until its result is actually
+     required. This allows for a modular style using intermediate data
+     structures.
+- Reasoning about programs :: Because programs are pure, simple /equational
+     reasoning/ can be applied to Haskell programs.
+
+[1]: A function is said to have side effects if modifies some state or has some
+/observable/ interaction with the outside world. For example, a function might
+modify a global variable, raise an exception, write data to a display or file.
+
+** A taste of Haskell
+: sum :: Num a => [a] -> a
+: sum [] = 0
+: sum (x:xs) = x + sum xs
+
+sum [x] = x + sum [] = x + 0 = x
+
+The type declaration of this function can be read as: ~sum~ is a function that
+takes a list of numbers (~[a]~) as argument and returns another number (~a~).
+
+Types provide useful documentation to programmers and, more importantly, allow a
+greater number of errors to be detected at compile-time. Therefore, a more
+powerful type system leads to less bugs.
+
+
+#+BEGIN_SRC haskell
+  qsort [] = []
+  qsort (x:xs) = qsort smaller ++ [x] ++ qsort larger
+                 where
+                   smaller = [a | a <- xs, a <= x]
+                   larger [b | b <- xs, b > x]
+#+END_SRC
+
+** Exercises
+2. sum [x] = x + sum [] = x + 0 = x
+3.
+: product :: Num a => [a] -> a
+: product [] = 1
+: product (x:xs) = x * product xs
+4. ~qsort smaller ++ [x] ++ qsort larger~ would be ~qsort larger ++ [x] ++ qsort
+smaller~
+1. Duplicates would be removed.
+
+* Chapter 2
+** Common library functions
+- ~car~ of a list:
+  : head [1,2,3] => 1
+
+- ~cdr~ of a list:
+  : tail [1,2,3] => [2,3]
+
+- Select the nth element of a list:
+  : [1,2,3] !! 2 => 3
+
+- Take the first n elements of a list:
+  : take 2 [1,2,3] => [1,2]
+
+- Drop the first n elements of a list:
+  : drop 2 [1,2,3] => [3]
+
+- Length of a list:
+  : length [1,2,3] => 3
+
+- Sum of a list:
+  : sum [-11,2,3] => 4
+
+- Product of a list:
+  : product [-1,2,3] => -6
+
+- Append two lists:
+  : [1,2] ++ [3] => 3
+
+- Reverse a list:
+  : reverse [1,2,3] => [1,2,3]
+
+** Comments
+- Ordinary:
+  : -- This is a comment
+
+- Nested:
+  : {-
+  : Multi-line
+  : comments!
+  : -}
+
+** Exercises
+ 4.
+#+BEGIN_SRC haskell
+  last1 :: [a] -> a
+  last1 l = head (reverse l)
+
+  import Data.Maybe
+
+  last2 :: [a] -> Maybe a
+  last2 [] = Nothing
+  last2 [x] = Just x
+  last2 (x:xs) = last xs
+#+END_SRC
+5.
+#+BEGIN_SRC haskell
+  init1 :: [a] -> [a]
+  init1 [x] = []
+  init1 (x:xs) = [x] ++ init1 xs
+
+  init2 :: [a] -> [a]
+  init2 l = take (length l - 1) l
+#+END_SRC

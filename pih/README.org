@@ -1,0 +1,8 @@
+#+TITLE: Notes on PiH
+#+AUTHOR: @frankpf
+
+These are my personal notes on the book "Programming in Haskell", 1st ed.,
+written by Graham Hutton.
+
+* Index
+- [[./notes.org][Notes]]

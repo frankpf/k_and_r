@@ -10,6 +10,7 @@ The notes were taken using [[https://www.gnu.org/software/emacs/][Emacs]] and th
 ** Reading
 - [[./k_and_r][The C Programming Language (K&R)]]
 - [[./oosc2/README.org][Object-Oriented Software Construction, 2nd ed. (OOSC-2)]]
+- [[./pih/README.org][Programming in Haskell, 1st ed. (PiH)]]
 
 ** Read
-- [[./pointers_and_memory][Pointers and Memory]]
+- [[./pointers_and_memory/README.org][Pointers and Memory]]
