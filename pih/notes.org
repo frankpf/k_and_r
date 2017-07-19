@@ -127,3 +127,171 @@ smaller~
   init2 :: [a] -> [a]
   init2 l = take (length l - 1) l
 #+END_SRC
+
+* Chapter 3
+A type is a set of values. For example, ~Bool~ is the set {~False~, ~True~}, and
+~Bool -> Bool~ is the set that contains all functions that map boolean arguments
+to boolean results, such as the ~not~ function.
+
+The notation ~v :: T~ is used to denote that the value ~v~ is of type ~T~, and
+say that "v has type T".
+
+Every expression has a type in Haskell, calculated at compile-time using type
+inference. The key to this process is a rule which states that if /f/ is a
+function that maps arguments of type /A/ to type /B/ and /e/ is an expression of
+type /A/, then /f e/ has type /B/.
+
+: f :: A -> B ∧ e :: A     →     f e :: B
+
+For example, the typing ~not False :: Bool~ can be inferred from this rule using
+the fact that ~not :: Bool~ and ~False :: Bool~. OTOH, ~not 3~ does not have a
+type, because that would require ~3 :: Bool~.
+
+Because type inference happens at compile-time, Haskell programs are /type
+safe/, meaning that type errors can never occur during evaluation.
+
+The downside of type safety is that some expressions that evaluate will be
+rejected. For example, ~if True then 1 else False~ evaluates to 1, but contains
+a type error: the typing rule for a conditional expression requires that both
+possible results have the same type. In practice, however, programmers quickly
+learn how to avoid these problems.
+
+In GHCI, type ~:t~ to show the type of any expression:
+: :t (+)    =>    Num a => a -> a -> a
+
+** Basic types
+- Bool :: logical values ~True~ and ~False~
+- Char :: single characters, denoted by single quotes, such as 'a', '_', '\n'
+- String :: strings of characters, denoted by double quotes
+- Int :: fixed-precision integers
+- Integer :: arbitrary-precision integers (less performant than ~Int~)
+- Float :: single-precision floating-point numbers
+
+A single number may have more than one numeric type. For example, ~3 :: Int~,
+~3:: Integer~ and ~3 :: Float~ are all valid typings for 3.
+
+** List types
+We write ~[T]~ for the type of a list with elements of type ~T~. For example,
+~[Bool]~ is the type of a list of ~Bool~s and ~[['a','b'],['c','d']]~ is of type
+~[ [Char] ]~.
+
+The number of elements in a list is called its /length/.
+
+** Tuple types
+A ~tuple~ is a finite sequence of elements with possibly different types. We
+write ~(T_1, T_2, ..., T_n)~ for the types of tuples. For example,
+~([True, False], 3, "abc")~ has type ~Num t => ([Bool], t, [Char])~ (note [Char]
+is equal to String).
+
+The number of elements in a tuple is called its /arity/. Tuples of arity 1 such
+as ~(False)~ are not permitted. In contrast to lists, the type of tuples *do*
+determine their arity (list types *do not* convey their length).
+
+Unlike lists, tuples must have a finite size so their types can be calculated at
+compile time.
+
+** Function types
+Functions do not have to be ~total~ on their argument type. This means that
+there may be some arguments for which the result is undefined. ~head~, for
+example, is undefined for the empty list.
+
+** Curried functions
+Functions in Haskell are curried by default, meaning they take their argument
+one at a time. This is interesting because partial application can be used to
+create new useful functions.
+
+** Parametric polymorphism
+The type of length is:
+: length :: [a] -> Int
+
+This means that, for any type ~a~, ~length~ takes a list of ~a~s and returns an
+~Int~.
+
+A type that contains one or more type variables is called polymorphic. Hence,
+~[a] -> Int~ is a polymorphic type and ~length~ is a polymorphic function.
+
+** Overloaded types
+The arithmetic operator + is overloaded:
+: 1 + 2 => 3
+: 1.5 + 2.2 => 3.7
+
+The idea that + can be applied to numbers of any numeric type is denoted in its
+type using a /class constraint/:
+
+: (+) :: Num a => a -> a -> a
+
+This means that for any type ~a~ that is an /instance/ of the ~Num~ typeclass,
+the function ~(+)~ has type ~a -> a -> a~. A type or expression that contains one or more
+class contraints is called /overloaded/.
+
+Most of the numeric functions in Prelude are overloaded, as are numbers
+themselves. For example, ~3~ has type ~Num a => a~, meaning for any numeric type
+~a~, ~3~ has type ~a~.
+
+** Basic classes
+A type is a collection of values. A /class/ is a collection of types that
+support certain overloaded operations called /methods/. Haskell provides a
+number of basic classes:
+
+*** *Eq* - equality types
+Contains types whose values can be compared for equality/inequality using the
+following methods:
+
+: (==) :: a -> a -> Bool
+: (/=) :: a -> a -> Bool
+
+~Bool~, ~Char~, ~String~, ~Int~, ~Integer~, and ~Float~ are instances of the
+~Eq~ class. Lists and tuples will also be instances of ~Eq~ if their element and
+component types are instances.
+
+*** *Ord* - ordered types
+This class is a subset of ~Eq~ (meaning all ~Ord~ instances are ~Eq~ instances).
+In addition, ~Ord~ contains types whose values are totally (linearly) ordered,
+and as such can be compared with the following six methods:
+
+: (<) :: a -> a -> Bool
+: (<=) :: a -> a -> Bool
+: (>) :: a -> a -> Bool
+: (>=) :: a -> a -> Bool
+: min :: a -> a -> a
+: max :: a -> a -> a
+
+~Bool~, ~Char~, ~String~, ~Int~, ~Integer~, ~Float~ are instances of ~Ord~.
+Lists/tuples will also be if their element/component types are instances of
+~Ord~ too.
+
+Strings, lists and tuples are ordered lexicographically.
+
+*** *Show* - showable types
+Contains types whose values can be converted into strings of characteres using
+the following method:
+
+: show :: a -> String
+
+For example:
+
+: > show False
+: "False"
+
+: > show 123
+: "123"
+
+*** *Read* - readable types
+Dual to ~Show~: contains types whose values can be converted from strings:
+
+: read :: String -> a
+
+For example:
+
+: > read "False" :: Bool
+: False
+
+: > read "[1,2,3]" :: [Int]
+: [1,2,3]
+
+: > read "\"False\"" :: String
+: "False"
+
+*** *Num* - numeric types
+*** *Integral* - integral types
+*** *Fractional* - fractional types
